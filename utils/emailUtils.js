@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Function to send OTP email
-const sendOTPEmail = async (toEmail, otp, callback) => {
+const sendOTPEmail = async (toEmail, otp) => {
   try {
     // Create email options
     const mailOptions = {
@@ -26,7 +26,7 @@ const sendOTPEmail = async (toEmail, otp, callback) => {
     transporter.sendMail(mailOptions, (error, info)) ;
 
   } catch (error) {
-    console.error("Error sending OTP email:", error);
+    console.log("Error sending OTP email:", error);
   }
 };
 

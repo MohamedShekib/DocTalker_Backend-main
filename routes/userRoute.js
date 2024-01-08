@@ -18,8 +18,7 @@ router.put("/", auth, updateUser);
 // router.get('/google/redirect', authController.googleRedirect);
 
 //TODO OTP AUTH
-router.post('/otp/verify',verifyOtp);
-/// ... handle the otp resending
-// router.post('/otp/resend', authController.resendOtp);
+router.post('/otp/verify',auth,verifyOtp);
+router.post('/otp/resend',auth, authController.resendOtp);
 
 module.exports = router;
