@@ -6,13 +6,13 @@ const morgan = require("morgan")
 require("dotenv").config()
 const cors = require("cors")
 require("../config/passport")
-function isLoggedIn(req, res, next) {
-  require.user ? next() : res.sendStatus(401)
-}
+
+
+
 const app = express()
 
 const PORT = process.env.PORT || 3000
-app.use(session({secret:"cats"}))
+app.use(session({secret:"theDevs"}))
 app.use(cors(
   {
     origin: "*",
@@ -27,13 +27,13 @@ app.use(express.urlencoded({ extended: true }))
 app.use(morgan("dev"))
 
 // Session middleware
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET || "secret",
-//     resave: false,
-//     saveUninitialized: false,
-//   })
-// )
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+)
 
 // Passport initialization --> for google auth
 app.use(passport.initialize())
@@ -49,30 +49,10 @@ const chatRoutes = require("../routes/chatRoute")
 // Home auth
 app.get("/", (req, res) => {
   try {
-    res.send('<a href="/auth/google">Authentication with Google</a>')
+    res.status(200).json({ status: "success" })
   } catch (err) {
     res.status(500).json({ status: "error" })
   }
-})
-app.get("/auth/google", 
-passport.authenticate('google',{scope:['email','profile']})
-)
-
-
-app.get("/auth/google/redirect",
-passport.authenticate('google',
-{
-  successRedirect:'/protected',
-  failureRedirect:'/auth/failure',
-})
-)
-
-app.get('/auth/failure',(req, res) => {
-  res.send('something went wrong')
-})
-
-app.get('/protected',(req, res) => {
-res.send('hello')
 })
 
 // Mount routes

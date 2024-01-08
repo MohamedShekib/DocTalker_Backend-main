@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { createUser, login, deleteUser, updateUser } = require('../controllers/userController');
+const { createUser, deleteUser, updateUser } = require('../controllers/userController');
 const { auth } = require('../middlewares/auth');
+const {signup , login} = require('../controllers/authController');
+const { verifyOtp } = require('../controllers/authController');
 
-router.post("/signup", createUser);
+
 router.post("/login", login);
+router.post("/signup", signup);
 
 // Routes that require authentication
 router.delete("/", auth, deleteUser);
@@ -14,8 +17,9 @@ router.put("/", auth, updateUser);
 // router.get('/google', userController.googleAuth);
 // router.get('/google/redirect', authController.googleRedirect);
 
-// TODO OTP AUTH
-// router.post('/otp/verify', authController.verifyOtp);
+//TODO OTP AUTH
+router.post('/otp/verify',verifyOtp);
+/// ... handle the otp resending
 // router.post('/otp/resend', authController.resendOtp);
 
 module.exports = router;

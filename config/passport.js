@@ -10,6 +10,7 @@ passport.use(
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        // dev
         callbackURL: 'http://localhost:5000/auth/google/redirect',
         // passReqToCallback: true
       },
@@ -34,7 +35,6 @@ passport.use(
               lastName: profilejson.family_name,
               email: profilejson.email,
               password: hashedPassword
-              // You can set other default values here as needed
             });
   
             await user.save();
@@ -60,23 +60,3 @@ passport.serializeUser(function (user, done)
   done(null, user);
 }
  )
-
-    // // Check if a user with the same Google ID already exists in your database
-          // let user = await User.findOne({ googleId: profile.id });
-  
-          // if (user) {
-          //   // User already exists, return the user
-          //   return done(null, user);
-          // } else {
-          //   // User doesn't exist, create a new user using Google profile information
-          //   user = new User({
-          //     googleId: profile.id,
-          //     Fname: profile.given_name,
-          //     Lname: profile.family_name,
-          //     email: profile.email,
-          //     // You can set other default values here as needed
-          //   });
-  
-          //   await user.save();
-          //   return done(null, user);
-          // }

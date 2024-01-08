@@ -25,21 +25,21 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    googleId: {
-        type: String,
-        unique: true,  // idk if this is needed -- google already gives unique IDs
-        default: null
-    },
+    // googleId: {
+    //     type: String,
+    //     default: null
+    // },
     subscription: {
         type: String,
         enum: ['free', 'gold', 'premium'],
         default: 'free',
     },
-    stripeCustomerId: {
-        type: String,
-        unique: true,
-    },
+    // stripeCustomerId: {
+    //     type: String,
+    //     unique: true,
+    // },
     // check if the user already made the OTP or not 
+    
     isVerified: {
         type : Boolean,
         default : false 
