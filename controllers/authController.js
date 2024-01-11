@@ -128,7 +128,9 @@ exports.resendOtp = async (req, res) => {
 
     // Generate and store OTP
     const otp = generateOTP();
+    // opt expires in 20 minutes
     const otpExpiresIn = new Date(Date.now() + 20 * 60 * 1000);
+
 
     // Send OTP email
     await sendOTPEmail(email, otp);
