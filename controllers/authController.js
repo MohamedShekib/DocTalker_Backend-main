@@ -6,7 +6,6 @@ const { generateToken } = require("../utils/generateToken");
 const { sendOTPEmail } = require("../utils/emailUtils");
 const { generateOTP } = require("../utils/generateOTP");
 const { validateEmail } = require("../utils/emailVaildation");
-const nodemailer = require('nodemailer');
 
 
 exports.signup = async (req, res) => {
@@ -189,7 +188,3 @@ exports.verifyOtp = async (req, res) => {
     }
   };
 
- 
-  
-
-// Other necessary imports and functions (e.g., generateOTP) go here
